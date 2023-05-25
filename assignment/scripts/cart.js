@@ -31,26 +31,76 @@ console.log('***** Cart Functions *****');
 
 let basket = []
 let item = ''
-function addItem(item) {
-basket.push(item)
-if (basket.includes(item)){
-    return true
-} else return false
+const maxItems = 5
+
+function isFull(){
+    if (basket.length >= 5) {
+        return false
+    } else return true
 }
-console.log(addItem("Banana"))
+function addItem(item) {
+    if (isFull()) {
+        basket.push(item)
+        if (basket.includes(item)){
+            return true
+        } else return false
+    }
+}
 
 function listItems() {
     console.log(basket.map(item => item))
 }
 
+function removeItem(item) {
+const itemInBasket = basket.indexOf(item)
+if (itemInBasket != -1) {
+    basket.splice(itemInBasket,1)
+    return basket[itemInBasket]
+} else return null
+}
 
 function emptyBasket(){
   basket = []
 }
+addItem("Banana")
 addItem("Apple")
 addItem("Strawberry")
+addItem("Bread")
+addItem("Yogurt")
+removeItem("Apple")
+addItem("Nuts")
 listItems()
+emptyBasket()
+addItem("Toyota Supra")
+addItem("2015 STI")
+addItem("Ferrari")
+addItem("Lambourghini")
+addItem("Audi")
+addItem("Volkswagen")
+listItems()
+// ### Stretch Goals 
+// Remember that Stretch Goals are not required, but will help you to further develop concepts from the skills we have covered.
 
+// __Using functions in other functions!__
+
+// 1. Add a global `const` named `maxItems` and set it to 5.
+
+// 2. Create a function called isFull(). It should:
+//   - return `false` if the basket contains *less* than max number of items
+//   - return `true` otherwise (equal or more than maxItems)
+
+// 3. Update the required `addItem` function to:
+//   - Use the `isFull` function to prevent more than `maxItems` from being added to the basket. 
+//   - If an item was added to the array, return `true`
+//   - If there was no room and the item could not be added return `false`
+
+// __Using Array built-in functions!__
+
+// 4. Create a function called `removeItem`. It should:
+//   - Take an input parameter for a string `item`
+//   - Use [Array.indexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) to find the index of the first matching item in the basket.
+//   - Use [Array.splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) to remove the first matching item from the basket.
+//   - Return the item removed or `null` if the item was not found
 
 
 
